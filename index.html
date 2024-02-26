@@ -13,10 +13,10 @@
 <script src="https://js.stripe.com/v3/"></script>
 <script>
   // Initialize Stripe with your publishable key
-  var stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+  var stripe = Stripe('pk_test_51Oi2mdLeuUtGWH7M38js9zvq8E7Ds3n50V6SofRPO67HAhMCx8Zbpm4auDKSzdxTP6XjyTQJ1AIWaZNAceUMeujY00e4L5M7uT');
 
   async function pay(amount) {
-    const response = await fetch('/create-checkout-session', {
+    const response = await fetch('http://localhost:3000/create-checkout-session', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

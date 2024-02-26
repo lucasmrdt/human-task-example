@@ -1,11 +1,15 @@
 // Assuming you have express and stripe installed
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const stripe = require('stripe')('YOUR_STRIPE_SECRET_KEY');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const cors = require('cors');
+
+app.use(cors());
+app.use(express.json());
 
 app.post('/create-checkout-session', async (req, res) => {
   const { amount } = req.body; // Make sure to validate and convert to smallest currency unit (e.g., cents for USD)
-  
   try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],

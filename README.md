@@ -55,3 +55,7 @@ response = humantask.create(
 
 # Got 0 Errors! 🎉
 ```
+
+## Note
+
+We've committed `.env` for demonstration purposes only since it doesn't contain any sensitive information. However, in a real-world scenario, you should never commit your `.env` file to a public repository.
