@@ -1,0 +1,39 @@
+<html>
+
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <h1>Home</h1>
+    <button onclick="pay(10)">Pay $10</button>
+</body>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  // Initialize Stripe with your publishable key
+  var stripe = Stripe('YOUR_STRIPE_PUBLISHABLE_KEY');
+
+  async function pay(amount) {
+    const response = await fetch('/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({amount: amount * 100}), // Convert amount to smallest currency unit, e.g., cents
+    });
+    const session = await response.json();
+
+    // Redirect to Stripe Checkout
+    const result = await stripe.redirectToCheckout({
+      sessionId: session.id,
+    });
+
+    if (result.error) {
+      alert(result.error.message);
+    }
+  }
+</script>
+
+</html>
